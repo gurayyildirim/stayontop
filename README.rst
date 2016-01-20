@@ -1,12 +1,15 @@
 stayontop
 ===========================================
 
-Development instances on AWS need to be shutdown off-hours.
+Development instances on AWS EC2 need to be shutdown off-hours.
 
 This small project tries to address this need providing a clear config file in yaml.
 * You can specify which instances must be stopped/running all the time.
 * By default all instances are set to be stopped off-hours
 * You can set all instances with a specific project tag to be open
+* Assumes office hours are between 07:00 - 19:00
+* Assumes EC2 instance tags: "project"
+* Assumes EC2 instance name matches  instance tag "Name"
 
 A sample config file:
 
@@ -33,7 +36,6 @@ A sample config file:
            aws_boto_profile: SYS
 
 Use case #1: Please keep FMS project stopped at weekends
-
    - Do not put it on weekend_on anywhere in the config
    - By default all projects are stopped unless stated otherwise
    - With the following config SAP project instances will be running during weekends
@@ -47,7 +49,6 @@ Use case #1: Please keep FMS project stopped at weekends
 
 
 Use case #2:  I want webdev01 instance to be running this night
-
 ::
 
    date_of_today:
@@ -60,7 +61,7 @@ Use case #3:  Please keep webdev01 instance stopped on off-hours
     - Unless stated otherwise all instances are stopped on off-hours
 
 
-Use case #3: Please keep dbdev01 instance stopped on working hours
+Use case #4: Please keep dbdev01 instance stopped on working hours
 ::
 
     global:
@@ -69,7 +70,7 @@ Use case #3: Please keep dbdev01 instance stopped on working hours
                  - dbdev01
 
 
-Use case #4:  Please keep dbdev01 instance stopped on 29.12.2015
+Use case #5:  Please keep dbdev01 instance stopped on 29.12.2015
    - Add the following to the config
    - Remove from the global config if necessary
 
