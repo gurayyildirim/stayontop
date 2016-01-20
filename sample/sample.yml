@@ -1,0 +1,53 @@
+# Global rules to follow
+# keep_stopped takes precedence over keep_running
+# 
+# Assumptions:
+#    - All projects instances are stopped on weekends and at night unless stated otherwise 
+#      with "weekend_on" for a whole project or "keep_running" for a specific instance
+#
+#    - All instances are stopped at nights unless stated otherwise
+
+
+global:
+   # only those project are affected by the job
+   restricted:
+       projects:
+           - SAP
+           - FMS
+           - kartusAppPush
+
+   # keep those instances always running
+   keep_running:
+       instances:
+           - hana01.acme.com
+  
+   # keep those instances always stopped
+   keep_stopped:
+       instances:
+           - hanadyn.acme.com
+
+   # keep FMS project at weekends
+   weekend_on:
+       projects:
+           - FMS
+
+   aws_boto_profile: awsprofile
+
+# Date specific rule take precedence over global rules.
+# will be merged with global config
+
+1.1.2016:
+   # this overrides its counterpart on global
+   weekend_on:
+       projects:
+           - SAP
+ 
+   # this is going to be merged with its counterpart on global
+   keep_running: 
+       instances:
+           - sapdsips01.acme.com
+
+   # this is going to be merged with its counterpart on global
+   keep_stopped:
+       instances:
+           - saprs01.acme.com

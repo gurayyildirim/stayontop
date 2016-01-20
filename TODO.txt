@@ -1,0 +1,11 @@
+additional restriction with instance environment
+environment value will be case-insensitive
+
+restrict:
+   projects:
+       - FMS
+   environment:
+       - dev
+       - staged
+       - stage
+       - test

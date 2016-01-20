@@ -1,0 +1,27 @@
+global:
+   restricted:
+       projects:
+           - BI
+           - CRM
+           - PUSHAPP
+   keep_running:
+       instances:
+           - hana01.acme.com
+   keep_stopped:
+       instances:
+           - hanadyn.acme.com
+   weekend_on:
+       projects:
+           - BI
+   aws_boto_profile: SYS
+
+{current_date}:
+   weekend_on:
+       projects:
+           - SAP
+   keep_running:
+       instances:
+           - sapdsips01.acme.com
+   keep_stopped:
+       instances:
+           - saprs01.acme.com

@@ -1,0 +1,9 @@
+DEPLOYDIR=/data/jenkins/scripts/aws/stayontop
+mkdir -pv ${DEPLOYDIR}
+cp -v stayontop/stayontop.py ${DEPLOYDIR}
+chmod -v +x ${DEPLOYDIR}/stayontop.py
+if [ $? -ne 0 ]; then
+   echo "deploy failed"
+else
+   echo "deploy succeeded"
+fi

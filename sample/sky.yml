@@ -1,0 +1,15 @@
+global:
+
+   restricted:
+       projects:
+        - sky
+
+   weekend_on:
+       projects:
+        - sky
+
+   keep_stopped:
+       instances:
+        - sky-front
+
+   aws_boto_profile: ecom
