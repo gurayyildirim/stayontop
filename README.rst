@@ -4,6 +4,7 @@ stayontop
 Development instances on AWS EC2 need to be shutdown off-hours.
 
 This small project tries to address this need providing a clear config file in yaml.
+
   - You can specify which instances must be stopped/running all the time.
   - By default all instances are set to be stopped off-hours
   - You can set all instances with a specific project tag to be open
