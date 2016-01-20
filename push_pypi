@@ -1,0 +1,10 @@
+
+PYPI="pypitest"
+
+if [ "$1" == "prod" ]; then
+   PYPI="pypi"
+
+fi
+
+python setup.py register -r ${PYPI}
+python setup.py sdist upload -r ${PYPI}
