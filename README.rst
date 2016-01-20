@@ -86,6 +86,26 @@ Use case #5:  Please keep dbdev01 instance stopped on 29.12.2015
 Running
 -----------------------
 
+Prepare boto config
+
+::
+
+  $ cat >> ~jenkins/.boto
+  [Credentials]
+  aws_access_key_id = <access_key>
+  aws_secret_access_key = <secret_key>
+
+  [profile sys]
+  aws_access_key_id =  <access_key>
+  aws_secret_access_key = <secret_key>
+
+
+  [profile ecom]
+  aws_access_key_id = <access_key>
+  aws_secret_access_key = <secret_key>
+
+
+Install via git clone
 ::
 
         $ git clone stayontop.git
@@ -114,3 +134,8 @@ Running
                 prj-staged: stopped -> stopped
                 prj-test: stopped -> stopped
 
+
+Install via pip
+::
+
+        $ pip install stayontop
