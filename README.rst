@@ -12,68 +12,62 @@ A sample config file:
 
 ::
 
-global:
-   restricted:
-       projects:
-           - BI
-           - CRM
-           - PUSHAPP
-   keep_running:
-       instances:
-           - sybase.acme.com
-           - hana01.acme.com
-   keep_stopped:
-       instances:
-           - sybase.acme.com
-           - hanadyn.acme.com
-           - apush.acme.com
-   weekend_on:
-       projects:
-           - BI
-   aws_boto_profile: SYS
-
-::
-
+        global:
+           restricted:
+              projects:
+                    - BI
+                    - CRM
+                    - PUSHAPP
+           keep_running:
+              instances:
+                    - sybase.acme.com
+                    - hana01.acme.com
+           keep_stopped:
+              instances:
+                    - sybase.acme.com
+                    - hanadyn.acme.com
+                    - apush.acme.com
+           weekend_on:
+              projects:
+                    - BI
+           aws_boto_profile: SYS
 
 Use case #1: Please keep FMS project stopped at weekends
+
    - Do not put it on weekend_on anywhere in the config
    - By default all projects are stopped unless stated otherwise
    - With the following config SAP project instances will be running during weekends
 
-
 ::
 
-global:
-   weekend_on:
-       projects:
-           - SAP
+   global:
+      weekend_on:
+         projects:
+              - SAP
 
 
 Use case #2:  I want webdev01 instance to be running this night
 
-
-date_of_today:
-    keep_running:
-       instances:
-           - webdev01
-
 ::
+
+   date_of_today:
+      keep_running:
+          instances:
+             - webdev01
+
 
 Use case #3:  Please keep webdev01 instance stopped on off-hours
     - Unless stated otherwise all instances are stopped on off-hours
 
 
-
 Use case #3: Please keep dbdev01 instance stopped on working hours
-
 ::
 
-global:
-    keep_stopped:
-        instances:
-             - dbdev01
+    global:
+        keep_stopped:
+             instances:
+                 - dbdev01
 
-::
 
 Use case #4:  Please keep dbdev01 instance stopped on 29.12.2015
    - Add the following to the config
@@ -81,39 +75,40 @@ Use case #4:  Please keep dbdev01 instance stopped on 29.12.2015
 
 ::
 
-29.12.2015:
-    keep_stopped:
-        instances:
-             - dbdev01
-::
+     29.12.2015:
+         keep_stopped:
+              instances:
+                  - dbdev01
 
 
 Running
 -----------------------
-::
-
-$ git clone stayontop.git
-$ cd stayontop
-$ sudo -u jenkins python stayontop.py --dryrun project.yml
-Parsed config: {'restricted': ['sky'], 'weekend_on': [], 'keep_running': [], 'keep_stopped': [], 'is_holiday': False, 'aws_boto_profile': 'ecom'}
-        prj-front: running -> stopped
-        prj-staged: running -> stopped
-        prj-test: running -> stopped
-Nothing is changed(dryrun mode)
-
-$ sudo -u jenkins python stayontop.py project.yml
-Parsed config: {'restricted': ['sky'], 'weekend_on': [], 'keep_running': [], 'keep_stopped': [], 'is_holiday': False, 'aws_boto_profile': 'ecom'}
-        prj-front: running -> stopped
-....Stopping....
-        prj-staged: running -> stopped
-....Stopping....
-        prj-test: running -> stopped
-....Stopping....
-
-$ sudo -u jenkins python stayontop.py project.yml
-Parsed config: {'restricted': ['sky'], 'weekend_on': [], 'keep_running': [], 'keep_stopped': [], 'is_holiday': False, 'aws_boto_profile': 'ecom'}
-        prj-front: stopped -> stopped
-        prj-staged: stopped -> stopped
-        prj-test: stopped -> stopped
 
 ::
+
+        $ git clone stayontop.git
+        $ cd stayontop
+        $ python setup.py install
+      
+        $ sudo -u jenkins /usr/bin/stayontop --dryrun project.yml
+        Parsed config: {'restricted': ['sky'], 'weekend_on': [], 'keep_running': [], 'keep_stopped':[], 'is_holiday': False, 'aws_boto_profile': 'ecom'}``
+                prj-front: running -> stopped
+                prj-staged: running -> stopped
+                prj-test: running -> stopped
+        Nothing is changed(dryrun mode)
+
+        $ sudo -u jenkins /usr/bin/stayontop project.yml
+        Parsed config: {'restricted': ['sky'], 'weekend_on': [], 'keep_running': [], 'keep_stopped': [], 'is_holiday': False, 'aws_boto_profile': 'ecom'}
+                prj-front: running -> stopped
+                ....Stopping....
+                prj-staged: running -> stopped
+                ....Stopping....
+                prj-test: running -> stopped
+                ....Stopping....
+
+        $ sudo -u jenkins /usr/bin/stayontop project.yml
+        Parsed config: {'restricted': ['sky'], 'weekend_on': [], 'keep_running': [], 'keep_stopped':   [], 'is_holiday': False, 'aws_boto_profile': 'ecom'}
+                prj-front: stopped -> stopped
+                prj-staged: stopped -> stopped
+                prj-test: stopped -> stopped
+
