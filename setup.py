@@ -48,7 +48,7 @@ setup(
     maintainer='Yagmur Guraslan',
     maintainer_email='guraslan@gmail.com',
     url='https://github.com/guraslan/stayontop',
-    download_url = 'https://github.com/guraslan/stayontop/tarball/0.1'
+    download_url = 'https://github.com/guraslan/stayontop/tarball/0.1a0'
     license='BSD',
     packages=['stayontop'],
     entry_points={
