@@ -123,7 +123,7 @@ def will_instance_run(instance_tags):
 
     """
 
-    instance_name = instance_tags['Name']
+    instance_name = instance_tags['Name'] if 'Name' in instance_tags else None
     instance_project = instance_tags['project'] if 'project' in instance_tags else None
     project_on_weekend = instance_project in config.get('weekend_on')
 
@@ -149,7 +149,7 @@ def stayontop_main():
                 project = instance.tags['project'] if 'project' in instance.tags else None
                 restricted_projects = config.get('restricted')
                 environment = instance.tags['Environment'] if 'Environment' in instance.tags.keys() else ''
-                name = instance.tags['Name']
+                name = instance.tags['Name'] if 'Name' in instance.tags.keys() else ''
 
                 if project in restricted_projects:
                     next_state = will_instance_run(instance.tags)
